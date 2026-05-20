@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@ehb.be',
             'password' => Hash::make('Password!321'), //Verander dit wachtwoord naar een veilig WW.
+            'role' => 'admin',
         ]);
     }
 }
