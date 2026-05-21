@@ -13,7 +13,9 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    
+        <!-- ZORG DAT DE FORM TAG ER ZO UITZIET: -->
+        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -45,6 +47,41 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <!-- Username -->
+        <div>
+            <x-input-label for="username" :value="__('Publieke Gebruikersnaam (optioneel)')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" placeholder="bijv. jan_janssen" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <!-- Verjaardag -->
+        <div>
+            <x-input-label for="birthday" :value="__('Verjaardag (optioneel)')" />
+            <x-text-input id="birthday" name="birthday" type="date" class="mt-1 block w-full" :value="old('birthday', $user->birthday)" />
+            <x-input-error class="mt-2" :messages="$errors->get('birthday')" />
+        </div>
+
+        <!-- Over Mij -->
+        <div>
+            <x-input-label for="about_me" :value="__('Over Mij (optioneel)')" />
+            <textarea id="about_me" name="about_me" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="4">{{ old('about_me', $user->about_me) }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('about_me')" />
+        </div>
+
+        <!-- Profielfoto -->
+        <div>
+            <x-input-label for="profile_photo" :value="__('Profielfoto (optioneel)')" />
+            
+            @if($user->profile_photo)
+                <div class="my-2">
+                    <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Huidige foto" class="w-20 h-20 rounded-full object-cover">
+                </div>
+            @endif
+
+            <input id="profile_photo" name="profile_photo" type="file" class="mt-1 block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+            <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
         </div>
 
         <div class="flex items-center gap-4">

@@ -10,7 +10,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+// We hebben hier de rol en alle nieuwe profielvelden aan de Fillable lijst toegevoegd
+#[Fillable([
+    'name', 
+    'email', 
+    'password', 
+    'role', 
+    'username', 
+    'birthday', 
+    'profile_photo', 
+    'about_me'
+])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,6 +40,9 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Controleer of de gebruiker een specifieke rol heeft.
+     */
     public function hasRole(string $role): bool
     {
         return $this->role === $role;

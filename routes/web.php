@@ -9,6 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Publieke profielpagina - voor iedereen toegankelijk (ook niet-ingelogd)
+Route::get('/user/{username}', [ProfileController::class, 'show'])->name('profile.show');
+
 // De centrale 'verkeerstoren' route
 Route::get('/dashboard', function () {
     $user = Auth::user();
