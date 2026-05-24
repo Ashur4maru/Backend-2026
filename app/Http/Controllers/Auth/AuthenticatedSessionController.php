@@ -33,9 +33,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('admin.dashboard'); // Stuur admin naar admin dashboard
         }
 
-        // Stuur normale gebruikers naar het standaard dashboard
-            return redirect()->intended(route('dashboard', absolute: false));
-            }
+        // Stuur normale gebruikers naar het welcome scherm voor een normale gebruikerservaring
+        return redirect()->intended('/');
+    }
 
     /**
      * Destroy an authenticated session.
