@@ -44,6 +44,10 @@
                             @endif
                         @endauth
                     @endif
+
+                    <a href="{{ route('faq') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition">
+                        FAQ
+                    </a>
                 </div>
             </div>
         </nav>
