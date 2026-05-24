@@ -4,10 +4,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController; // Vergeet deze import niet!
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NewsController; // Vergeet deze import niet!
+use App\Http\Controllers\Admin\AdminNewsController;
 
-Route::get('/', function () {
-    return view('welcome');
+/*Route::get('/', function () {
+    //return view('welcome');
+
+
 });
+*/
+
+Route::get('/', [NewsController::class, 'index'])->name('home');
+
+
 
 // Publieke profielpagina - voor iedereen toegankelijk (ook niet-ingelogd)
 Route::get('/user/{username}', [ProfileController::class, 'show'])->name('profile.show');
@@ -44,6 +53,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // /admin/users          (admin.users.store) -> Opslaan
     // /admin/users/{user}   (admin.users.destroy) -> Verwijderen
     Route::resource('users', UserController::class);
+
+    Route::get('/admin/news', [AdminNewsController::class, 'index'])->name('admin.news.index');
+    Route::get('/admin/news/create', [AdminNewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/admin/news', [AdminNewsController::class, 'store'])->name('admin.news.store');
 });
 
 
